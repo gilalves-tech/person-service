@@ -31,4 +31,9 @@ POST https://rzif4r01eg.execute-api.eu-central-1.amazonaws.com/dev
     "phoneNumber": "+31123456789",
     "address": "3516 Hidden Street"
 }
+```
+
+2. List persons
+
+GET https://rzif4r01eg.execute-api.eu-central-1.amazonaws.com/dev
 
