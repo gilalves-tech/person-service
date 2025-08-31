@@ -1,17 +1,40 @@
-// import * as cdk from 'aws-cdk-lib';
-// import { Template } from 'aws-cdk-lib/assertions';
-// import * as PersonService from '../lib/person-service-stack';
+import * as cdk from 'aws-cdk-lib';
+import { Template } from 'aws-cdk-lib/assertions';
+import { PersonServiceStack } from '../lib/person-service-stack';
+import { ConfigDev } from '../lib/config/config.dev';
 
-// example test. To run these tests, uncomment this file along with the
-// example resource in lib/person-service-stack.ts
-test('SQS Queue Created', () => {
-//   const app = new cdk.App();
-//     // WHEN
-//   const stack = new PersonService.PersonServiceStack(app, 'MyTestStack');
-//     // THEN
-//   const template = Template.fromStack(stack);
+describe('PersonServiceStack', () => {
+	let app: cdk.App;
+	let config: ConfigDev;
+	let stack: PersonServiceStack;
+	let template: Template;
 
-//   template.hasResourceProperties('AWS::SQS::Queue', {
-//     VisibilityTimeout: 300
-//   });
+	beforeEach(() => {
+		app = new cdk.App();
+		config = new ConfigDev();
+		stack = new PersonServiceStack(app, 'TestStack', config, {});
+		template = Template.fromStack(stack);
+	});
+
+	test('DynamoDB Table Created', () => {
+		template.hasResourceProperties('AWS::DynamoDB::Table', {
+			TableName: config.tableName
+		});
+	});
+
+	test('IAM Role Created', () => {
+		template.resourceCountIs('AWS::IAM::Role', 2);
+	});
+
+	test('SNS Topic Created', () => {
+		template.resourceCountIs('AWS::SNS::Topic', 1);
+	});
+
+	test('Lambda Function Created', () => {
+		template.resourceCountIs('AWS::Lambda::Function', 2);
+	});
+
+	test('API Gateway Created', () => {
+		template.resourceCountIs('AWS::ApiGateway::RestApi', 1);
+	});
 });
