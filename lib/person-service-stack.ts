@@ -8,7 +8,6 @@ import { LambdaResource } from "./resources/lambda";
 import { ApiGatewayResource } from "./resources/api-gateway";
 import { SnsResource } from "./resources/sns";
 import { LambdaFunctionNames } from "./enums/lambda-function-names";
-import path from "path";
 
 export class PersonServiceStack extends Stack {
 	private config: IConfig;
@@ -25,8 +24,8 @@ export class PersonServiceStack extends Stack {
 		this.config = config;
 		this.iamResource = new IamResource(this, 'IamResource', config);
 
-		this.initializeLambdaResources();
 		this.initializeDynamoDbResource();
+		this.initializeLambdaResources();
 		this.initializeApiGatewayResource();
 	}
 
@@ -46,21 +45,22 @@ export class PersonServiceStack extends Stack {
 
 		this.snsResource.grantPublishPermissions(this.createPersonLambda.function);
 
-		// this.listPersonsLambda = new LambdaResource(this, LambdaFunctionNames.LIST_PERSONS, this.config, {
-		// 	functionName: LambdaFunctionNames.LIST_PERSONS,
-		// 	handler: 'src/handlers/list-persons.handler',
-		// 	role: this.iamResource.role,
-		// 	environment: {
-		// 		...this.defaultEnvironmentVariables
-		// 	}
-		// });
+		this.listPersonsLambda = new LambdaResource(this, LambdaFunctionNames.LIST_PERSONS, this.config, {
+			functionName: LambdaFunctionNames.LIST_PERSONS,
+			handler: "handler",
+			entry: "src/handlers/list-persons.ts",
+			role: this.iamResource.role,
+			environment: {
+				...this.defaultEnvironmentVariables
+			}
+		});
 	}
 
 	private initializeApiGatewayResource(): void {
 		this.apiGatewayResource = new ApiGatewayResource(this, 'ApiGatewayResource', this.config);
 
 		this.apiGatewayResource.createEndpointLambda('POST', LambdaFunctionNames.CREATE_PERSON, this.createPersonLambda.function);
-		// this.apiGatewayResource.createEndpointLambda('GET', LambdaFunctionNames.LIST_PERSONS, this.listPersonsLambda.function);
+		this.apiGatewayResource.createEndpointLambda('GET', LambdaFunctionNames.LIST_PERSONS, this.listPersonsLambda.function);
 	}
 
 	private initializeDynamoDbResource(): void {
