@@ -1,14 +1,30 @@
-# Welcome to your CDK TypeScript project
+# Person Service
 
-This is a blank project for CDK development with TypeScript.
+This repository contains a serverless microservice built as part of the assessment for the Fullstack Engineer role at Tikkie.
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+The purpose of this project is to demonstrate building a scalable and maintainable backend service using AWS Serverless technologies, following best practices around infrastructure-as-code, API design, and data storage.
 
-## Useful commands
+## Functionality
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `npx cdk deploy`  deploy this stack to your default AWS account/region
-* `npx cdk diff`    compare deployed stack with current state
-* `npx cdk synth`   emits the synthesized CloudFormation template
+The Person Service exposes a RESTful API for managing person data. It uses AWS API Gateway, Lambda, and DynamoDB to provide scalable, on-demand compute and persistence. The available endpoints are:
+
+- POST /person -> Create a new person
+- GET /person -> List all persons
+
+## Deployment
+- npm install
+- cdk bootstrap
+- npm run deploy:dev
+
+
+## Testing
+
+Request Body Example:
+
+{
+    "firstName": "John",
+    "lastName": "Doe",
+    "phoneNumber": "+31123456789",
+    "address": "3516 Hidden Street"
+}
+
