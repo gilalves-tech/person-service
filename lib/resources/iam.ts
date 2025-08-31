@@ -10,7 +10,7 @@ export class IamResource extends BaseResource {
 		super(scope, id, config);
 
 		this.iamRole = new Role(this, 'PersonServiceRole', {
-			roleName: id,
+			roleName: config.roleName,
 			assumedBy: new ServicePrincipal('lambda.amazonaws.com'),
 			managedPolicies: this.getManagedAwsLambdaPolicies().map(policy => ManagedPolicy.fromAwsManagedPolicyName(policy)),
 		});
@@ -24,7 +24,6 @@ export class IamResource extends BaseResource {
 		const policy = new PolicyStatement({
 			actions: [
 				"dynamodb:PutItem",
-				"dynamodb:GetItem",
 				"dynamodb:Scan",
 			],
 			resources: [

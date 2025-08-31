@@ -11,4 +11,8 @@ export abstract class Config implements IConfig {
 	get tableName(): string {
 		return `Persons-${this.stage}`;
 	}
+
+	get roleName(): string {
+		return `person-service-role-${this.stage}`;
+	}
 }
