@@ -39,7 +39,7 @@ export class PersonServiceStack extends Stack {
 			role: this.iamResource.role,
 			environment: {
 				SNS_TOPIC_ARN: this.snsResource.topicArn,
-				...this.defaultEnvironmentVariables
+				...this.commonEnvironmentVariables
 			}
 		});
 
@@ -51,7 +51,7 @@ export class PersonServiceStack extends Stack {
 			entry: "src/handlers/list-persons.ts",
 			role: this.iamResource.role,
 			environment: {
-				...this.defaultEnvironmentVariables
+				...this.commonEnvironmentVariables
 			}
 		});
 	}
@@ -68,7 +68,7 @@ export class PersonServiceStack extends Stack {
 		this.iamResource.addDynamoDbPolicy();
 	}
 
-	private get defaultEnvironmentVariables(): Record<string, string> {
+	private get commonEnvironmentVariables(): Record<string, string> {
 		return {
 			REGION: this.config.region,
 			DYNAMODB_TABLE: this.config.tableName
