@@ -23,7 +23,7 @@ export class ApiGatewayResource extends BaseResource {
 		super(scope, id, config);
 
 		this.restApi = new RestApi(this, 'RestApi', {
-			restApiName: `PersonService-${this.config.stage}`,
+			restApiName: config.apiName,
 			deployOptions: {
 				stageName: this.config.stage,
 			},
