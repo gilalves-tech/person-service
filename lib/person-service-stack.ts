@@ -33,7 +33,7 @@ export class PersonServiceStack extends Stack {
 
 		this.snsResource = new SnsResource(this, 'SnsResource', this.config);
 		this.createPersonLambda = new LambdaResource(this, LambdaFunctionNames.CREATE_PERSON, this.config, {
-			functionName: LambdaFunctionNames.CREATE_PERSON,
+			functionName: `${LambdaFunctionNames.CREATE_PERSON}-${this.config.stage}`,
 			handler: "handler",
 			entry: "src/handlers/create-person.ts",
 			role: this.iamResource.role,
@@ -46,7 +46,7 @@ export class PersonServiceStack extends Stack {
 		this.snsResource.grantPublishPermissions(this.createPersonLambda.function);
 
 		this.listPersonsLambda = new LambdaResource(this, LambdaFunctionNames.LIST_PERSONS, this.config, {
-			functionName: LambdaFunctionNames.LIST_PERSONS,
+			functionName: `${LambdaFunctionNames.LIST_PERSONS}-${this.config.stage}`,
 			handler: "handler",
 			entry: "src/handlers/list-persons.ts",
 			role: this.iamResource.role,
