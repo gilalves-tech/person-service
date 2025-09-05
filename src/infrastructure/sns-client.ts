@@ -1,9 +1,10 @@
 import { SNSClient as AwsSNSClient, PublishCommand } from "@aws-sdk/client-sns";
-import { Person } from "src/interfaces/person.interface";
-import { EventType } from "src/enums/event-type.enum";
-import { accessEnv } from "src/utils/accessEnv";
+import { Person } from "../interfaces/person.interface";
+import { EventType } from "../enums/event-type.enum";
+import { accessEnv } from "../utils/accessEnv";
+import { ISnsClient } from "../interfaces/sns-client.interface";
 
-export class SnsClient {
+export class SnsClient implements ISnsClient {
 	private static instance: SnsClient;
 	private client: AwsSNSClient;
 	private topicArn: string;
@@ -37,6 +38,7 @@ export class SnsClient {
 		try {
 			await this.client.send(new PublishCommand(params));
 			console.log(`✅ Event published to ${this.topicArn}`, params);
+
 		} catch (error) {
 			console.error("❌ Failed to publish event", error);
 			throw error;
