@@ -1,7 +1,6 @@
 import { IConfig } from "./config.interface";
 
 export abstract class Config implements IConfig {
-
 	readonly abstract accountId: string;
 	readonly abstract region: string;
 	readonly abstract stage: string;
@@ -9,10 +8,18 @@ export abstract class Config implements IConfig {
 	readonly stackName = "PersonServiceStack";
 
 	get tableName(): string {
-		return `Persons-${this.stage}`;
+		return `persons-table-${this.stage}`;
 	}
 
 	get roleName(): string {
 		return `person-service-role-${this.stage}`;
+	}
+
+	get apiName(): string {
+		return `person-api-${this.stage}`;
+	}
+
+	get topicName(): string {
+		return `person-created-topic-${this.stage}`;
 	}
 }
