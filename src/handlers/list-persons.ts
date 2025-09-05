@@ -1,11 +1,13 @@
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 import { DynamoDbClient } from "../infrastructure/dynamo-db-client";
+import { ListPersonsRequestHandler } from "../application/list-persons-request-handler";
 
 const dynamoDbClient = DynamoDbClient.getInstance();
 
 export const handler: APIGatewayProxyHandlerV2 = async () => {
 	try {
-		const persons = await dynamoDbClient.listPersons();
+		const listPersonsHandler = new ListPersonsRequestHandler(dynamoDbClient);
+		const persons = await listPersonsHandler.handle();
 
 		return {
 			statusCode: 200,
