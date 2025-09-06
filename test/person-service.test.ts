@@ -1,16 +1,18 @@
-import * as cdk from 'aws-cdk-lib';
+import { App } from 'aws-cdk-lib';
 import { Template } from 'aws-cdk-lib/assertions';
 import { PersonServiceStack } from '../lib/person-service-stack';
 import { ConfigDev } from '../lib/config/config.dev';
 
 describe('PersonServiceStack', () => {
-	let app: cdk.App;
+	let app: App;
 	let config: ConfigDev;
 	let stack: PersonServiceStack;
 	let template: Template;
 
 	beforeEach(() => {
-		app = new cdk.App();
+		jest.clearAllMocks();
+		
+		app = new App();
 		config = new ConfigDev();
 		stack = new PersonServiceStack(app, 'TestStack', config, {});
 		template = Template.fromStack(stack);
