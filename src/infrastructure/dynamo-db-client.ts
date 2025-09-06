@@ -1,10 +1,10 @@
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient, PutCommand, ScanCommand } from "@aws-sdk/lib-dynamodb";
-import { IDynamoDbClient } from "../interfaces/dynamo-db-client.interface";
+import { PersonRepository } from "../interfaces/person-repository.interface";
 import { Person } from "../interfaces/person.interface";
 import { accessEnv } from "../utils/accessEnv";
 
-export class DynamoDbClient implements IDynamoDbClient {
+export class DynamoDbClient implements PersonRepository {
 	private static instance: DynamoDbClient;
 	private client: DynamoDBDocumentClient;
 	private tableName: string;

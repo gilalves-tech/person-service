@@ -1,10 +1,10 @@
 import { Person } from "../interfaces/person.interface";
-import { IDynamoDbClient } from "src/interfaces/dynamo-db-client.interface";
-import { RequestHandler } from "src/interfaces/request-handler.interface";
+import { PersonRepository } from "../interfaces/person-repository.interface";
+import { RequestHandler } from "../interfaces/request-handler.interface";
 
 export class ListPersonsRequestHandler implements RequestHandler<undefined, Person[]> {
 	constructor(
-		private dynamoDbClient: IDynamoDbClient
+		private dynamoDbClient: PersonRepository
 	) { }
 
 	async handle(): Promise<Person[]> {

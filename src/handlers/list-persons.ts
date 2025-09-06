@@ -6,8 +6,8 @@ const dynamoDbClient = DynamoDbClient.getInstance();
 
 export const handler: APIGatewayProxyHandlerV2 = async () => {
 	try {
-		const listPersonsHandler = new ListPersonsRequestHandler(dynamoDbClient);
-		const persons = await listPersonsHandler.handle();
+		const requestHandler = new ListPersonsRequestHandler(dynamoDbClient);
+		const persons = await requestHandler.handle();
 
 		return {
 			statusCode: 200,

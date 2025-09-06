@@ -2,9 +2,9 @@ import { SNSClient as AwsSNSClient, PublishCommand } from "@aws-sdk/client-sns";
 import { Person } from "../interfaces/person.interface";
 import { EventType } from "../enums/event-type.enum";
 import { accessEnv } from "../utils/accessEnv";
-import { ISnsClient } from "../interfaces/sns-client.interface";
+import { PersonEventPublisher } from "../interfaces/person-event-publisher.interface";
 
-export class SnsClient implements ISnsClient {
+export class SnsClient implements PersonEventPublisher {
 	private static instance: SnsClient;
 	private client: AwsSNSClient;
 	private topicArn: string;

@@ -1,9 +1,13 @@
+import { PersonRepository } from '../src/interfaces/person-repository.interface';
 import { ListPersonsRequestHandler } from '../src/application/list-persons-request-handler';
 
 describe('ListPersonsRequestHandler', () => {
 	const listPersons = jest.fn();
 
-	const dynamoDbClient = { listPersons } as any;
+	const dynamoDbClient: PersonRepository = {
+		listPersons,
+		putPerson: jest.fn(),
+	};
 
 	beforeEach(() => {
 		jest.clearAllMocks();
