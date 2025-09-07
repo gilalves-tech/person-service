@@ -1,4 +1,4 @@
-export enum Environment {
+export enum Environments {
 	DEV = "dev",
 	PRD = "prd",
 }

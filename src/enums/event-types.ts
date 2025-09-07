@@ -1,3 +1,3 @@
-export enum EventType {
+export enum EventTypes {
 	PERSON_CREATED = "person-created-event",
 }

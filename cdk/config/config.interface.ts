@@ -4,7 +4,7 @@ export interface IConfig {
 	readonly stage: string;
 	readonly stackName: string;
 	readonly tableName: string;
-	readonly roleName: string;
+	// readonly roleName: string;
 	readonly apiName: string;
 	readonly topicName: string;
 }

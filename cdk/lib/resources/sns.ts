@@ -1,7 +1,7 @@
 import { Construct } from "constructs";
 import { Topic } from "aws-cdk-lib/aws-sns";
 import { BaseResource } from "./base-resource";
-import { IConfig } from "../config/config.interface";
+import { IConfig } from "../../config/config.interface";
 import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs";
 
 export class SnsResource extends BaseResource {
@@ -11,12 +11,12 @@ export class SnsResource extends BaseResource {
 		super(scope, id, config);
 
 		this.topic = new Topic(this, "PersonCreatedTopic", {
-			topicName: `person-created-${config.stage}`,
+			topicName: this.config.topicName,
 			displayName: "Person Created Event",
 		});
 	}
 
-	public grantPublishPermissions(lambdaFunction: NodejsFunction) {
+	public grantPublish(lambdaFunction: NodejsFunction) {
 		this.topic.grantPublish(lambdaFunction);
 	}
 

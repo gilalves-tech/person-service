@@ -1,8 +1,9 @@
 import { RemovalPolicy, CfnOutput } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { Table, AttributeType, BillingMode } from 'aws-cdk-lib/aws-dynamodb';
-import { IConfig } from '../config/config.interface';
+import { IConfig } from '../../config/config.interface';
 import { BaseResource } from './base-resource';
+import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 
 export class DynamoDbResource extends BaseResource {
 	private readonly personTable: Table;
@@ -24,5 +25,13 @@ export class DynamoDbResource extends BaseResource {
 			value: this.personTable.tableName,
 			description: 'The DynamoDB table name for persons',
 		});
+	}
+
+	public grantWrite(lambdaFunction: NodejsFunction) {
+		this.personTable.grantWriteData(lambdaFunction);
+	}
+
+	public grantRead(lambdaFunction: NodejsFunction) {
+		this.personTable.grantReadData(lambdaFunction);
 	}
 }

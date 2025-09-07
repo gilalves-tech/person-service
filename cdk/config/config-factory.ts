@@ -1,14 +1,14 @@
 import { Node } from "constructs";
-import { IConfig } from "../config/config.interface";
-import { Environment } from "../enums/environments.enum";
-import { ConfigDev } from "../config/config.dev";
+import { IConfig } from "./config.interface";
+import { Environments } from "../enums/environments";
+import { ConfigDev } from "./config.dev";
 
 export class ConfigFactory {
 	public static createConfig(target: Node): IConfig {
-		const env = target.tryGetContext("env") as Environment ?? Environment.DEV;
+		const env = target.tryGetContext("env") as Environments ?? Environments.DEV;
 
 		switch (env) {
-			case Environment.DEV:
+			case Environments.DEV:
 				return new ConfigDev();
 			// Add other environments here (e.g., PRD)
 			default:

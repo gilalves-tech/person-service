@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 import { App } from 'aws-cdk-lib';
 import { PersonServiceStack } from '../lib/person-service-stack';
-import { ConfigFactory } from '../lib/config/config-factory';
-import { IConfig } from '../lib/config/config.interface';
+import { ConfigFactory } from '../config/config-factory';
+import { IConfig } from '../config/config.interface';
 
 const app = new App();
 const config: IConfig = ConfigFactory.createConfig(app.node);

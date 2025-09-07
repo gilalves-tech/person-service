@@ -11,10 +11,6 @@ export abstract class Config implements IConfig {
 		return `persons-table-${this.stage}`;
 	}
 
-	get roleName(): string {
-		return `person-service-role-${this.stage}`;
-	}
-
 	get apiName(): string {
 		return `person-api-${this.stage}`;
 	}

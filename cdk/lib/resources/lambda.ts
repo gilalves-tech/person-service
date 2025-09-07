@@ -3,7 +3,7 @@ import { Construct } from "constructs";
 import { Runtime } from "aws-cdk-lib/aws-lambda";
 import { Duration } from "aws-cdk-lib";
 import { BaseResource } from "./base-resource";
-import { IConfig } from "../config/config.interface";
+import { IConfig } from "../../config/config.interface";
 import { NodejsFunction, NodejsFunctionProps } from "aws-cdk-lib/aws-lambda-nodejs";
 
 export class LambdaResource extends BaseResource {

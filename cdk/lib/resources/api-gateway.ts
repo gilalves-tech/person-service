@@ -11,8 +11,8 @@ import {
 } from "aws-cdk-lib/aws-apigateway";
 import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs";
 import { BaseResource } from "./base-resource";
-import { IConfig } from "../config/config.interface";
-import { LambdaFunctionNames } from "../enums/lambda-function-names";
+import { IConfig } from "../../config/config.interface";
+import { LambdaFunctionNames } from "../../enums/lambda-function-names";
 
 export class ApiGatewayResource extends BaseResource {
 	private restApi: RestApi;
