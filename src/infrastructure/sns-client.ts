@@ -1,6 +1,6 @@
 import { SNSClient as AwsSNSClient, PublishCommand } from "@aws-sdk/client-sns";
 import { Person } from "../interfaces/person.interface";
-import { EventType } from "../enums/event-type.enum";
+import { EventTypes } from "../enums/event-types";
 import { accessEnv } from "../utils/accessEnv";
 import { PersonEventPublisher } from "../interfaces/person-event-publisher.interface";
 
@@ -23,7 +23,7 @@ export class SnsClient implements PersonEventPublisher {
 		return SnsClient.instance;
 	}
 
-	async publish(eventType: EventType, message: Person): Promise<void> {
+	async publish(eventType: EventTypes, message: Person): Promise<void> {
 		const params = {
 			TopicArn: this.topicArn,
 			Message: JSON.stringify(message),

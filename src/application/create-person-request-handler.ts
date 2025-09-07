@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import { Person } from "../interfaces/person.interface";
 import { PersonCreateRequest } from "../interfaces/person-create-request.interface";
-import { EventType } from "../enums/event-type.enum";
+import { EventTypes } from "../enums/event-types";
 import { PersonRepository } from "../interfaces/person-repository.interface";
 import { PersonEventPublisher } from "src/interfaces/person-event-publisher.interface";
 import { RequestHandler } from "src/interfaces/request-handler.interface";
@@ -17,7 +17,7 @@ export class CreatePersonRequestHandler implements RequestHandler<PersonCreateRe
 		const person: Person = { personId, ...request };
 
 		await this.personRepository.putPerson(person);
-		await this.eventPublisher.publish(EventType.PERSON_CREATED, person);
+		await this.eventPublisher.publish(EventTypes.PERSON_CREATED, person);
 
 		return person;
 	}

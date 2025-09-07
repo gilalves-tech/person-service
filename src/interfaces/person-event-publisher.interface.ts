@@ -1,6 +1,6 @@
 import { Person } from "../interfaces/person.interface";
-import { EventType } from "src/enums/event-type.enum";
+import { EventTypes } from "src/enums/event-types";
 
 export interface PersonEventPublisher {
-	publish(eventType: EventType, data: Person): Promise<void>;
+	publish(eventType: EventTypes, data: Person): Promise<void>;
 }
