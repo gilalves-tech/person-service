@@ -16,6 +16,7 @@ The Person Service exposes a RESTful API for managing person data. It uses AWS A
 
 - Before deploying, create a .env.dev file at the root of the project containing your AWS account information:
 
+```env
 AWS_ACCOUNT_ID=your-aws-account-id
 AWS_REGION=your-aws-region
 
