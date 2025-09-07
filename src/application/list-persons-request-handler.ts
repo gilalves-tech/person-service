@@ -4,10 +4,10 @@ import { RequestHandler } from "../interfaces/request-handler.interface";
 
 export class ListPersonsRequestHandler implements RequestHandler<undefined, Person[]> {
 	constructor(
-		private dynamoDbClient: PersonRepository
+		private personRepository: PersonRepository
 	) { }
 
 	async handle(): Promise<Person[]> {
-		return await this.dynamoDbClient.listPersons();
+		return await this.personRepository.listPersons();
 	}
 }
