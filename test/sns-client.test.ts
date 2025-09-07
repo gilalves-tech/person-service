@@ -1,6 +1,6 @@
 import { PublishCommand } from '@aws-sdk/client-sns';
 import { SnsClient } from '../src/infrastructure/sns-client';
-import { EventType } from '../src/enums/event-type.enum';
+import { EventTypes } from '../src/enums/event-types';
 import { Person } from '../src/interfaces/person.interface';
 
 jest.mock('@aws-sdk/client-sns', () => ({
@@ -22,7 +22,7 @@ describe('SnsClient', () => {
 	it('Should publish a message to SNS', async () => {
 		const client = SnsClient.getInstance();
 		const person: Person = { personId: '1', firstName: 'John', lastName: 'Doe', phoneNumber: '123', address: 'Street' };
-		const eventType = EventType.PERSON_CREATED;
+		const eventType = EventTypes.PERSON_CREATED;
 
 		await expect(client.publish(eventType, person)).resolves.toBeUndefined();
 

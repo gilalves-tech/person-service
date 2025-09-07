@@ -1,6 +1,6 @@
-import { PersonRepository } from 'src/interfaces/person-repository.interface';
+import { PersonRepository } from '../src/interfaces/person-repository.interface';
 import { CreatePersonRequestHandler } from '../src/application/create-person-request-handler';
-import { EventType } from '../src/enums/event-type.enum';
+import { EventTypes } from '../src/enums/event-types';
 import { PersonEventPublisher } from '../src/interfaces/person-event-publisher.interface';
 
 jest.mock('uuid', () => ({
@@ -41,6 +41,6 @@ describe('CreatePersonRequestHandler', () => {
 		});
 
 		expect(putPerson).toHaveBeenCalledWith(result);
-		expect(publish).toHaveBeenCalledWith(EventType.PERSON_CREATED, result);
+		expect(publish).toHaveBeenCalledWith(EventTypes.PERSON_CREATED, result);
 	});
 });

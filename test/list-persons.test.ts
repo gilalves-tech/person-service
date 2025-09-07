@@ -1,5 +1,4 @@
 import { handler } from '../src/handlers/list-persons';
-import { DynamoDbClient } from '../src/infrastructure/dynamo-db-client';
 import { ListPersonsRequestHandler } from '../src/application/list-persons-request-handler';
 import { APIGatewayProxyEventV2, Callback, Context } from 'aws-lambda';
 

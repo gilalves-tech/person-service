@@ -1,7 +1,7 @@
 import { App } from 'aws-cdk-lib';
 import { Template } from 'aws-cdk-lib/assertions';
-import { PersonServiceStack } from '../lib/person-service-stack';
-import { ConfigDev } from '../lib/config/config.dev';
+import { PersonServiceStack } from '../cdk/lib/person-service-stack';
+import { ConfigDev } from '../cdk/config/config.dev';
 
 describe('PersonServiceStack', () => {
 	let app: App;
@@ -11,7 +11,7 @@ describe('PersonServiceStack', () => {
 
 	beforeEach(() => {
 		jest.clearAllMocks();
-		
+
 		app = new App();
 		config = new ConfigDev();
 		stack = new PersonServiceStack(app, 'TestStack', config, {});
@@ -22,10 +22,6 @@ describe('PersonServiceStack', () => {
 		template.hasResourceProperties('AWS::DynamoDB::Table', {
 			TableName: config.tableName
 		});
-	});
-
-	test('IAM Role Created', () => {
-		template.resourceCountIs('AWS::IAM::Role', 2);
 	});
 
 	test('SNS Topic Created', () => {

@@ -1,8 +1,7 @@
 import { handler } from "../src/handlers/create-person";
 import { CreatePersonRequestHandler } from "../src/application/create-person-request-handler";
 import { APIGatewayProxyEventV2, Callback, Context } from "aws-lambda";
-import { Person } from "src/interfaces/person.interface";
-import { PersonCreateRequest } from "src/interfaces/person-create-request.interface";
+import { PersonCreateRequest } from "../src/interfaces/person-create-request.interface";
 
 jest.mock("../src/infrastructure/dynamo-db-client", () => ({
 	DynamoDbClient: { getInstance: jest.fn(() => ({})) },
