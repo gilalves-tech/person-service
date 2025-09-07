@@ -7,6 +7,7 @@ import { LambdaResource } from "./resources/lambda";
 import { ApiGatewayResource } from "./resources/api-gateway";
 import { SnsResource } from "./resources/sns";
 import { LambdaFunctionNames } from "../enums/lambda-function-names";
+import { SqsResource } from "./resources/sqs";
 
 export class PersonServiceStack extends Stack {
 	private config: IConfig;
@@ -15,6 +16,7 @@ export class PersonServiceStack extends Stack {
 	private listPersonsLambda: LambdaResource;
 	private apiGatewayResource: ApiGatewayResource;
 	private snsResource: SnsResource;
+	private sqsResource: SqsResource;
 
 	constructor(scope: Construct, id: string, config: IConfig, props: StackProps) {
 		super(scope, id, props);
@@ -23,6 +25,7 @@ export class PersonServiceStack extends Stack {
 
 		this.initializeDynamoDbResource();
 		this.initializeSnsResource();
+		this.initializeSqsResource();
 		this.initialiseCreatePersonLambda();
 		this.initialiseListPersonsLambda();
 		this.initializeApiGatewayResource();
@@ -75,6 +78,13 @@ export class PersonServiceStack extends Stack {
 
 	private initializeSnsResource(): void {
 		this.snsResource = new SnsResource(this, 'SnsResource', this.config);
+	}
+
+	private initializeSqsResource(): void {
+		if (!this.config.testQueueName) return;
+
+		this.sqsResource = new SqsResource(this, 'SqsResource', this.config, this.config.testQueueName);
+		this.snsResource.addSqsSubscription(this.sqsResource.queue);
 	}
 
 	private get commonEnvironmentVariables(): Record<string, string> {
