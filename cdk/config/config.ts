@@ -1,11 +1,21 @@
+import * as dotenv from 'dotenv';
+import { RemovalPolicy } from 'aws-cdk-lib';
 import { IConfig } from "./config.interface";
+import { accessEnv } from '../../src/utils/accessEnv';
 
 export abstract class Config implements IConfig {
-	readonly abstract accountId: string;
-	readonly abstract region: string;
-	readonly abstract stage: string;
+	constructor(readonly stage: string) {
+		dotenv.config({ path: `.env.${stage}` });
+	}
 
-	readonly stackName = "PersonServiceStack";
+	abstract readonly dynamoRemovalPolicy: RemovalPolicy;
+
+	readonly accountId: string = accessEnv('AWS_ACCOUNT_ID');
+	readonly region: string = accessEnv('AWS_REGION');
+
+	get stackName(): string {
+		return `PersonServiceStack-${this.stage}`;
+	}
 
 	get tableName(): string {
 		return `persons-table-${this.stage}`;

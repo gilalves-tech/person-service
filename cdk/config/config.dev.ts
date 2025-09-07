@@ -1,8 +1,10 @@
+import * as dotenv from 'dotenv';
 import { Config } from "./config";
+import { RemovalPolicy } from 'aws-cdk-lib';
+
+dotenv.config({ path: `.env.dev` });
 
 export class ConfigDev extends Config {
-	readonly accountId = "087895311216";
-	readonly region = "eu-central-1";
-	readonly stage = "dev";
 	readonly testQueueName = `person-service-test-queue-${this.stage}`;
+	readonly dynamoRemovalPolicy = RemovalPolicy.DESTROY;
 }

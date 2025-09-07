@@ -22,7 +22,7 @@ The Person Service exposes a RESTful API for managing person data. It uses AWS A
 
 1. Create a person
 
-POST https://vvvsq7sp5c.execute-api.eu-central-1.amazonaws.com/dev/person
+POST https://wla3yuzq80.execute-api.eu-central-1.amazonaws.com/dev/person
 ```json
 {
     "firstName": "John",
@@ -34,7 +34,7 @@ POST https://vvvsq7sp5c.execute-api.eu-central-1.amazonaws.com/dev/person
 
 2. List persons
 
-GET https://vvvsq7sp5c.execute-api.eu-central-1.amazonaws.com/dev/person
+GET https://wla3yuzq80.execute-api.eu-central-1.amazonaws.com/dev/person
 
 
 ## Considerations

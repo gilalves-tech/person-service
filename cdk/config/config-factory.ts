@@ -9,7 +9,7 @@ export class ConfigFactory {
 
 		switch (env) {
 			case Environments.DEV:
-				return new ConfigDev();
+				return new ConfigDev(env);
 			// Add other environments here (e.g., PRD)
 			default:
 				throw new Error(`Environment is undefined.`);

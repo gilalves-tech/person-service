@@ -18,10 +18,10 @@ export class DynamoDbResource extends BaseResource {
 				type: AttributeType.STRING
 			},
 			billingMode: BillingMode.PAY_PER_REQUEST,
-			removalPolicy: RemovalPolicy.DESTROY,
+			removalPolicy: config.dynamoRemovalPolicy,
 		});
 
-		new CfnOutput(this, 'PersonsTableName', {
+		new CfnOutput(this, 'PersonsTable', {
 			value: this.personTable.tableName,
 			description: 'The DynamoDB table name for persons',
 		});
