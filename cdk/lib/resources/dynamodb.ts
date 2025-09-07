@@ -11,7 +11,7 @@ export class DynamoDbResource extends BaseResource {
 	constructor(scope: Construct, id: string, config: IConfig) {
 		super(scope, id, config);
 
-		this.personTable = new Table(this, 'PersonsTable', {
+		this.personTable = new Table(this, id, {
 			tableName: config.tableName,
 			partitionKey: {
 				name: 'personId',

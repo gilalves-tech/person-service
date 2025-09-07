@@ -10,7 +10,7 @@ export class SnsResource extends BaseResource {
 	constructor(scope: Construct, id: string, config: IConfig) {
 		super(scope, id, config);
 
-		this.topic = new Topic(this, "PersonCreatedTopic", {
+		this.topic = new Topic(this, id, {
 			topicName: this.config.topicName,
 			displayName: "Person Created Event",
 		});

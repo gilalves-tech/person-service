@@ -22,7 +22,7 @@ export class ApiGatewayResource extends BaseResource {
 	constructor(scope: Construct, id: string, config: IConfig) {
 		super(scope, id, config);
 
-		this.restApi = new RestApi(this, 'RestApi', {
+		this.restApi = new RestApi(this, id, {
 			restApiName: config.apiName,
 			deployOptions: {
 				stageName: this.config.stage,
