@@ -19,6 +19,7 @@ The Person Service exposes a RESTful API for managing person data. It uses AWS A
 ```env
 AWS_ACCOUNT_ID=your-aws-account-id
 AWS_REGION=your-aws-region
+```
 
 The CDK stack is configured to read these variables automatically during deployment to determine the target AWS account and region.
 
