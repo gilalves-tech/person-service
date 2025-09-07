@@ -9,7 +9,8 @@
 		"watch": "tsc -w",
 		"test": "jest",
 		"cdk": "cdk",
-		"deploy:dev": "cdk deploy --context env=dev --profile dev --require-approval never"
+		"deploy:dev": "cdk deploy --context env=dev --profile dev --require-approval never",
+		"destroy:dev": "cdk destroy --context env=dev --profile dev"
 	},
 	"devDependencies": {
 		"@types/aws-lambda": "^8.10.152",
