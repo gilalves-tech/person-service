@@ -1,7 +1,6 @@
 import { Construct } from "constructs";
 import { Stack, StackProps } from "aws-cdk-lib";
 import { IConfig } from "../config/config.interface";
-
 import { DynamoDbResource } from "./resources/dynamodb";
 import { IamResource } from "./resources/iam";
 import { LambdaResource } from "./resources/lambda";
@@ -11,7 +10,6 @@ import { LambdaFunctionNames } from "../enums/lambda-function-names";
 
 export class PersonServiceStack extends Stack {
 	private config: IConfig;
-	// private iamResource: IamResource;
 	private dynamoDbResource: DynamoDbResource;
 	private createPersonLambda: LambdaResource;
 	private listPersonsLambda: LambdaResource;
@@ -22,44 +20,13 @@ export class PersonServiceStack extends Stack {
 		super(scope, id, props);
 
 		this.config = config;
-		// this.iamResource = new IamResource(this, 'IamResource', config);
 
 		this.initializeDynamoDbResource();
 		this.initializeSnsResource();
-		// this.initializeLambdaResources();
-
 		this.initialiseCreatePersonLambda();
 		this.initialiseListPersonsLambda();
 		this.initializeApiGatewayResource();
 	}
-
-	// private initializeLambdaResources(): void {
-	// 	this.createPersonLambda = new LambdaResource(this, LambdaFunctionNames.CREATE_PERSON, this.config, {
-	// 		functionName: `${LambdaFunctionNames.CREATE_PERSON}-${this.config.stage}`,
-	// 		handler: "handler",
-	// 		entry: "src/handlers/create-person.ts",
-	// 		role: this.iamResource.role,
-	// 		environment: {
-	// 			SNS_TOPIC_ARN: this.snsResource.topicArn,
-	// 			...this.commonEnvironmentVariables
-	// 		}
-	// 	});
-
-	// 	this.dynamoDbResource.grantWrite(this.createPersonLambda.function);
-	// 	this.snsResource.grantPublish(this.createPersonLambda.function);
-
-	// 	this.listPersonsLambda = new LambdaResource(this, LambdaFunctionNames.LIST_PERSONS, this.config, {
-	// 		functionName: `${LambdaFunctionNames.LIST_PERSONS}-${this.config.stage}`,
-	// 		handler: "handler",
-	// 		entry: "src/handlers/list-persons.ts",
-	// 		role: this.iamResource.role,
-	// 		environment: {
-	// 			...this.commonEnvironmentVariables
-	// 		}
-	// 	});
-
-	// 	this.dynamoDbResource.grantRead(this.listPersonsLambda.function);
-	// }
 
 	private initialiseCreatePersonLambda(): void {
 		const createPersonIam = new IamResource(this, `CreatePersonIamResource`, this.config, `${LambdaFunctionNames.CREATE_PERSON}-role`);
